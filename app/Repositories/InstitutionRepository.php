@@ -7,10 +7,20 @@ namespace App\Repositories;
 use App\Data\InstitutionData;
 use App\Models\Institution;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 final readonly class InstitutionRepository implements InstitutionRepositoryInterface
 {
     private const array SORTABLE = ['name', 'type', 'created_at'];
+
+    /** @return Collection<int, InstitutionData> */
+    public function all(): Collection
+    {
+        return Institution::query()
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Institution $institution): InstitutionData => InstitutionData::fromModel($institution));
+    }
 
     /** @return LengthAwarePaginator<int, InstitutionData> */
     public function paginate(string $sortField, string $sortDirection, int $perPage): LengthAwarePaginator

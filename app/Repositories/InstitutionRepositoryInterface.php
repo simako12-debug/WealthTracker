@@ -6,9 +6,13 @@ namespace App\Repositories;
 
 use App\Data\InstitutionData;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface InstitutionRepositoryInterface
 {
+    /** @return Collection<int, InstitutionData> */
+    public function all(): Collection;
+
     /** @return LengthAwarePaginator<int, InstitutionData> */
     public function paginate(string $sortField, string $sortDirection, int $perPage): LengthAwarePaginator;
 
