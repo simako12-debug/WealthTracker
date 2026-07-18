@@ -1,0 +1,16 @@
+apiVersion: 1
+
+datasources:
+  - name: WealthTracker
+    type: postgres
+    access: proxy
+    url: pgsql:5432
+    user: sail
+    isDefault: true
+    jsonData:
+      database: wealthtracker
+      sslmode: disable
+      postgresVersion: 1700
+    secureJsonData:
+      password: password
+    editable: true

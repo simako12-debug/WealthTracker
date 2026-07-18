@@ -48,9 +48,26 @@ services:
                 - '${DB_USERNAME}'
             retries: 3
             timeout: 5s
+    grafana:
+        image: grafana/grafana:latest
+        ports:
+            - '3000:3000'
+        environment:
+            GF_SECURITY_ADMIN_USER: '${GRAFANA_ADMIN_USER:-admin}'
+            GF_SECURITY_ADMIN_PASSWORD: '${GRAFANA_ADMIN_PASSWORD:-admin}'
+            GF_USERS_ALLOW_SIGN_UP: 'false'
+        volumes:
+            - 'grafana-data:/var/lib/grafana'
+            - './docker/grafana/provisioning:/etc/grafana/provisioning'
+        networks:
+            - sail
+        depends_on:
+            - pgsql
 networks:
     sail:
         driver: bridge
 volumes:
     sail-pgsql:
+        driver: local
+    grafana-data:
         driver: local
