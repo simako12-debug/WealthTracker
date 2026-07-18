@@ -10,6 +10,8 @@ use App\Repositories\CurrencyRepository;
 use App\Repositories\CurrencyRepositoryInterface;
 use App\Repositories\FxRateRepository;
 use App\Repositories\FxRateRepositoryInterface;
+use App\Repositories\InstitutionRepository;
+use App\Repositories\InstitutionRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -19,5 +21,6 @@ class RepositoryServiceProvider extends ServiceProvider
         CurrencyRepositoryInterface::class => CurrencyRepository::class,
         CurrencyPairRepositoryInterface::class => CurrencyPairRepository::class,
         FxRateRepositoryInterface::class => FxRateRepository::class,
+        InstitutionRepositoryInterface::class => InstitutionRepository::class,
     ];
 }
