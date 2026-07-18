@@ -11,6 +11,10 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+
+                <div class="mt-4 px-6 pb-6">
+                    <livewire:fx-sync-button />
+                </div>
             </div>
         </div>
     </div>
