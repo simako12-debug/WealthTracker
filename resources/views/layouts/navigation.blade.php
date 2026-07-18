@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('currencies')" :active="request()->routeIs('currencies')">
                         {{ __('Currencies') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('accounts')" :active="request()->routeIs('accounts')">
+                        {{ __('Accounts') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -81,6 +84,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('currencies')" :active="request()->routeIs('currencies')">
                 {{ __('Currencies') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('accounts')" :active="request()->routeIs('accounts')">
+                {{ __('Accounts') }}
             </x-responsive-nav-link>
         </div>
 
