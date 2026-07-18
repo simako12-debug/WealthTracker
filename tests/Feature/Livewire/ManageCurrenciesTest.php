@@ -58,4 +58,20 @@ class ManageCurrenciesTest extends TestCase
 
         $this->assertDatabaseMissing('currencies', ['id' => $currency->id]);
     }
+
+    public function test_lowercase_code_is_rejected_when_uppercase_exists(): void
+    {
+        Currency::factory()->create(['code' => 'USD']);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ManageCurrencies::class)
+            ->call('create')
+            ->set('form.code', 'usd')
+            ->set('form.name', 'US dollar')
+            ->call('save')
+            ->assertHasErrors(['form.code']);
+
+        $this->assertSame(1, Currency::query()->where('code', 'USD')->count());
+        $this->assertDatabaseMissing('currencies', ['code' => 'usd']);
+    }
 }

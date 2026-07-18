@@ -44,6 +44,7 @@ class ManageCurrencies extends Component
 
     public function save(CurrencyRepositoryInterface $repository): void
     {
+        $this->form->code = strtoupper($this->form->code);
         $this->form->validate();
 
         if ($this->form->id === null) {
