@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Repositories\AccountRepository;
+use App\Repositories\AccountRepositoryInterface;
 use App\Repositories\CurrencyPairRepository;
 use App\Repositories\CurrencyPairRepositoryInterface;
 use App\Repositories\CurrencyRepository;
@@ -22,5 +24,6 @@ class RepositoryServiceProvider extends ServiceProvider
         CurrencyPairRepositoryInterface::class => CurrencyPairRepository::class,
         FxRateRepositoryInterface::class => FxRateRepository::class,
         InstitutionRepositoryInterface::class => InstitutionRepository::class,
+        AccountRepositoryInterface::class => AccountRepository::class,
     ];
 }
