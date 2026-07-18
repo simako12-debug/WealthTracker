@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\FxSource;
 use Database\Factories\FxRateFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $currency_to_id
  * @property string $rate
  * @property \Illuminate\Support\Carbon $rate_date
- * @property string $source
+ * @property FxSource $source
  */
 class FxRate extends Model
 {
@@ -46,6 +47,7 @@ class FxRate extends Model
         return [
             'rate_date' => 'date',
             'rate' => 'decimal:10',
+            'source' => FxSource::class,
         ];
     }
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
 
             $table->unique(['currency_from_id', 'currency_to_id', 'rate_date', 'source']);
-            $table->index(['currency_from_id', 'currency_to_id', 'rate_date']);
         });
     }
 

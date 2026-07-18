@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\FxSource;
 use App\Models\Currency;
 use App\Models\FxRate;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ class FxRateFactory extends Factory
             'currency_to_id' => Currency::factory(),
             'rate' => $this->faker->randomFloat(6, 1, 30),
             'rate_date' => $this->faker->date(),
-            'source' => 'cnb',
+            'source' => FxSource::CNB,
         ];
     }
 }
