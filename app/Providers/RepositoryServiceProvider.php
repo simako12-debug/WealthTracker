@@ -8,6 +8,8 @@ use App\Repositories\CurrencyPairRepository;
 use App\Repositories\CurrencyPairRepositoryInterface;
 use App\Repositories\CurrencyRepository;
 use App\Repositories\CurrencyRepositoryInterface;
+use App\Repositories\FxRateRepository;
+use App\Repositories\FxRateRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -16,5 +18,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public array $bindings = [
         CurrencyRepositoryInterface::class => CurrencyRepository::class,
         CurrencyPairRepositoryInterface::class => CurrencyPairRepository::class,
+        FxRateRepositoryInterface::class => FxRateRepository::class,
     ];
 }
