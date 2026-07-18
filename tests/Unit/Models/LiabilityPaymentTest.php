@@ -14,7 +14,7 @@ class LiabilityPaymentTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testPaymentBelongsToLiabilityWithDateCast(): void
+    public function test_payment_belongs_to_liability_with_date_cast(): void
     {
         $payment = LiabilityPayment::factory()->create([
             'payment_date' => '2026-05-01',

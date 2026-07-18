@@ -16,7 +16,7 @@ class LiabilityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testLiabilityRelationsAndCasts(): void
+    public function test_liability_relations_and_casts(): void
     {
         $institution = Institution::factory()->create();
         $czk = Currency::factory()->create(['code' => 'CZK']);

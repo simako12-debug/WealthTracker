@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(AccountType::class)]
 class AccountTypeTest extends TestCase
 {
-    public function testValues(): void
+    public function test_values(): void
     {
         $this->assertSame('investment', AccountType::INVESTMENT->value);
         $this->assertCount(4, AccountType::cases());

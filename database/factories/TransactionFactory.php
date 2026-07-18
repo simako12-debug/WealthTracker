@@ -14,7 +14,6 @@ class TransactionFactory extends Factory
 {
     protected $model = Transaction::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [

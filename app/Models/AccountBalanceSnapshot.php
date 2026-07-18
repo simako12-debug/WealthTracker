@@ -9,18 +9,20 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
  * @property string $account_id
  * @property string $balance
- * @property \Illuminate\Support\Carbon $snapshot_date
+ * @property Carbon $snapshot_date
  * @property null|string $note
  */
 class AccountBalanceSnapshot extends Model
 {
     /** @use HasFactory<AccountBalanceSnapshotFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = ['account_id', 'balance', 'snapshot_date', 'note'];

@@ -14,7 +14,7 @@ class CurrencyTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testFactoryCreatesCurrencyWithUuid(): void
+    public function test_factory_creates_currency_with_uuid(): void
     {
         $currency = Currency::factory()->create(['code' => 'CZK', 'name' => 'Czech koruna']);
 

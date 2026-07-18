@@ -21,6 +21,7 @@ class Institution extends Model
 {
     /** @use HasFactory<InstitutionFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = ['name', 'type', 'note'];

@@ -12,7 +12,6 @@ class CurrencyFactory extends Factory
 {
     protected $model = Currency::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [

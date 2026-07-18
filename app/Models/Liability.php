@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
@@ -19,8 +20,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $currency_id
  * @property string $interest_rate
  * @property null|string $monthly_payment
- * @property \Illuminate\Support\Carbon $start_date
- * @property null|\Illuminate\Support\Carbon $end_date
+ * @property Carbon $start_date
+ * @property null|Carbon $end_date
  * @property bool $is_active
  * @property null|string $note
  */
@@ -28,6 +29,7 @@ class Liability extends Model
 {
     /** @use HasFactory<LiabilityFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = [

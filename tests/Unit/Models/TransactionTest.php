@@ -16,7 +16,7 @@ class TransactionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testTransactionBelongsToAccountWithEnumAndDateCasts(): void
+    public function test_transaction_belongs_to_account_with_enum_and_date_casts(): void
     {
         $account = Account::factory()->create();
 

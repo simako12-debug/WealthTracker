@@ -13,7 +13,6 @@ class InstitutionFactory extends Factory
 {
     protected $model = Institution::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [

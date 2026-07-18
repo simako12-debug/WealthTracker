@@ -13,7 +13,6 @@ class AccountBalanceSnapshotFactory extends Factory
 {
     protected $model = AccountBalanceSnapshot::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [

@@ -16,7 +16,7 @@ class CurrencyPairTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testPairRelatesToBaseAndQuoteCurrencies(): void
+    public function test_pair_relates_to_base_and_quote_currencies(): void
     {
         $usd = Currency::factory()->create(['code' => 'USD']);
         $czk = Currency::factory()->create(['code' => 'CZK']);

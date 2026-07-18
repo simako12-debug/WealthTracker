@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
  * @property string $liability_id
- * @property \Illuminate\Support\Carbon $payment_date
+ * @property Carbon $payment_date
  * @property string $total_amount
  * @property null|string $principal_portion
  * @property null|string $interest_portion
@@ -23,6 +24,7 @@ class LiabilityPayment extends Model
 {
     /** @use HasFactory<LiabilityPaymentFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = [

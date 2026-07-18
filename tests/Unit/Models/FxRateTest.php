@@ -16,7 +16,7 @@ class FxRateTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testFxRateStoresHighPrecisionRateAndRelations(): void
+    public function test_fx_rate_stores_high_precision_rate_and_relations(): void
     {
         $usd = Currency::factory()->create(['code' => 'USD']);
         $czk = Currency::factory()->create(['code' => 'CZK']);

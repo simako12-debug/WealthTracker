@@ -10,13 +10,14 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
  * @property string $account_id
  * @property TransactionType $type
  * @property string $amount
- * @property \Illuminate\Support\Carbon $transaction_date
+ * @property Carbon $transaction_date
  * @property null|string $note
  * @property null|string $counterparty
  */
@@ -24,6 +25,7 @@ class Transaction extends Model
 {
     /** @use HasFactory<TransactionFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = ['account_id', 'type', 'amount', 'transaction_date', 'note', 'counterparty'];

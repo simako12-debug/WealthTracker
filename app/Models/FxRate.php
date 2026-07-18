@@ -10,19 +10,21 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
  * @property string $currency_from_id
  * @property string $currency_to_id
  * @property string $rate
- * @property \Illuminate\Support\Carbon $rate_date
+ * @property Carbon $rate_date
  * @property FxSource $source
  */
 class FxRate extends Model
 {
     /** @use HasFactory<FxRateFactory> */
     use HasFactory;
+
     use HasUuids;
 
     public const UPDATED_AT = null;

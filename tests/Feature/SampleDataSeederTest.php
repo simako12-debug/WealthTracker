@@ -19,7 +19,7 @@ class SampleDataSeederTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testSeederCreatesUsableSampleData(): void
+    public function test_seeder_creates_usable_sample_data(): void
     {
         $this->seed(SampleDataSeeder::class);
 
@@ -31,7 +31,7 @@ class SampleDataSeederTest extends TestCase
         $this->assertSame(3, Transaction::query()->count());
     }
 
-    public function testSeederIsIdempotentForCurrencies(): void
+    public function test_seeder_is_idempotent_for_currencies(): void
     {
         $this->seed(SampleDataSeeder::class);
         $this->seed(SampleDataSeeder::class);

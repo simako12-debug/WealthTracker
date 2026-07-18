@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FxSource::class)]
 class FxSourceTest extends TestCase
 {
-    public function testValues(): void
+    public function test_values(): void
     {
         $this->assertSame('cnb', FxSource::CNB->value);
         $this->assertSame('frankfurter', FxSource::FRANKFURTER->value);

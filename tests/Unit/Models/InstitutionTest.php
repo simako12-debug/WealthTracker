@@ -15,7 +15,7 @@ class InstitutionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testFactoryCreatesInstitutionWithEnumCast(): void
+    public function test_factory_creates_institution_with_enum_cast(): void
     {
         $institution = Institution::factory()->create(['type' => InstitutionType::BROKER]);
 

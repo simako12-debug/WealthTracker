@@ -15,7 +15,7 @@ class AccountBalanceSnapshotTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testSnapshotBelongsToAccountWithDateCast(): void
+    public function test_snapshot_belongs_to_account_with_date_cast(): void
     {
         $account = Account::factory()->create();
 

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(InstitutionType::class)]
 class InstitutionTypeTest extends TestCase
 {
-    public function testValues(): void
+    public function test_values(): void
     {
         $this->assertSame('bank', InstitutionType::BANK->value);
         $this->assertSame('lender', InstitutionType::LENDER->value);

@@ -23,6 +23,7 @@ class CurrencyPair extends Model
 {
     /** @use HasFactory<CurrencyPairFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = ['base_currency_id', 'quote_currency_id', 'source', 'is_active', 'note'];

@@ -14,7 +14,6 @@ class LiabilityFactory extends Factory
 {
     protected $model = Liability::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [

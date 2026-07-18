@@ -17,7 +17,7 @@ class AccountTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testAccountBelongsToInstitutionAndCurrency(): void
+    public function test_account_belongs_to_institution_and_currency(): void
     {
         $institution = Institution::factory()->create();
         $currency = Currency::factory()->create(['code' => 'USD']);

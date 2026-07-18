@@ -13,7 +13,6 @@ class LiabilityPaymentFactory extends Factory
 {
     protected $model = LiabilityPayment::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [

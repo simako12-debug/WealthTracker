@@ -19,6 +19,7 @@ class Currency extends Model
 {
     /** @use HasFactory<CurrencyFactory> */
     use HasFactory;
+
     use HasUuids;
 
     protected $fillable = ['code', 'name'];

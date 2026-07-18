@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TransactionType::class)]
 class TransactionTypeTest extends TestCase
 {
-    public function testValues(): void
+    public function test_values(): void
     {
         $this->assertSame('capital_gain', TransactionType::CAPITAL_GAIN->value);
         $this->assertSame('bond_income', TransactionType::BOND_INCOME->value);

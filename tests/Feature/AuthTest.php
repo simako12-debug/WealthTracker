@@ -15,17 +15,17 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testRegisterRouteIsRemoved(): void
+    public function test_register_route_is_removed(): void
     {
         $this->get('/register')->assertNotFound();
     }
 
-    public function testPasswordResetRouteIsRemoved(): void
+    public function test_password_reset_route_is_removed(): void
     {
         $this->get('/forgot-password')->assertNotFound();
     }
 
-    public function testSeededUserCanLogIn(): void
+    public function test_seeded_user_can_log_in(): void
     {
         config()->set('app.seed_user', [
             'name' => 'Test Owner',

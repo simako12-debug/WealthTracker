@@ -14,7 +14,6 @@ class FxRateFactory extends Factory
 {
     protected $model = FxRate::class;
 
-    /** @return array<string,mixed> */
     public function definition(): array
     {
         return [
