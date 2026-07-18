@@ -21,7 +21,7 @@ class FxSyncButtonTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testSyncFetchesAndReportsSummary(): void
+    public function test_sync_fetches_and_reports_summary(): void
     {
         Http::fake(['*cnb.cz*' => Http::response("18.07.2026 #137\nzemě|měna|množství|kód|kurz\nUSA|dolar|1|USD|23,100\n", 200)]);
 

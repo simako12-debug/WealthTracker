@@ -17,12 +17,12 @@ class ManageCurrenciesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testGuestCannotAccessRoute(): void
+    public function test_guest_cannot_access_route(): void
     {
         $this->get('/currencies')->assertRedirect('/login');
     }
 
-    public function testCreateCurrencyUppercasesCode(): void
+    public function test_create_currency_uppercases_code(): void
     {
         Livewire::actingAs(User::factory()->create())
             ->test(ManageCurrencies::class)
@@ -35,7 +35,7 @@ class ManageCurrenciesTest extends TestCase
         $this->assertDatabaseHas('currencies', ['code' => 'USD', 'name' => 'US dollar']);
     }
 
-    public function testCodeMustBeUnique(): void
+    public function test_code_must_be_unique(): void
     {
         Currency::factory()->create(['code' => 'EUR']);
 
@@ -48,7 +48,7 @@ class ManageCurrenciesTest extends TestCase
             ->assertHasErrors(['form.code']);
     }
 
-    public function testDeleteCurrency(): void
+    public function test_delete_currency(): void
     {
         $currency = Currency::factory()->create();
 

@@ -23,7 +23,7 @@ class CurrencyRepositoryCrudTest extends TestCase
         return $this->app->make(CurrencyRepositoryInterface::class);
     }
 
-    public function testPaginateFindCreateUpdateDelete(): void
+    public function test_paginate_find_create_update_delete(): void
     {
         Currency::factory()->create(['code' => 'AAA']);
         $page = $this->repository()->paginate('code', 'asc', 15);
