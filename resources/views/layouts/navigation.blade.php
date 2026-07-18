@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('liabilities')" :active="request()->routeIs('liabilities')">
                         {{ __('Liabilities') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('currency-pairs')" :active="request()->routeIs('currency-pairs')">
+                        {{ __('Currency Pairs') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -93,6 +96,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('liabilities')" :active="request()->routeIs('liabilities')">
                 {{ __('Liabilities') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('currency-pairs')" :active="request()->routeIs('currency-pairs')">
+                {{ __('Currency Pairs') }}
             </x-responsive-nav-link>
         </div>
 
