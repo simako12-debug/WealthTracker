@@ -51,7 +51,7 @@ class FxSyncServiceTest extends TestCase
         ]);
     }
 
-    public function testSyncUpsertsActivePairsFromBothSources(): void
+    public function test_sync_upserts_active_pairs_from_both_sources(): void
     {
         $this->fakeHttp();
         $this->seedPairs();
@@ -65,7 +65,7 @@ class FxSyncServiceTest extends TestCase
         $this->assertDatabaseHas('fx_rates', ['rate' => '0.9200000000', 'source' => 'frankfurter']);
     }
 
-    public function testSyncIsIdempotent(): void
+    public function test_sync_is_idempotent(): void
     {
         $this->fakeHttp();
         $this->seedPairs();
@@ -77,7 +77,7 @@ class FxSyncServiceTest extends TestCase
         $this->assertSame(2, FxRate::query()->count());
     }
 
-    public function testSyncCountsSkippedWhenRateUnavailable(): void
+    public function test_sync_counts_skipped_when_rate_unavailable(): void
     {
         Http::fake([
             '*cnb.cz*' => Http::response("18.07.2026 #137\nzemě|měna|množství|kód|kurz\n", 200),

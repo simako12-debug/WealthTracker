@@ -19,16 +19,16 @@ class FrankfurterRateProviderTest extends TestCase
     {
         return new CurrencyPairData(
             id: 'pair',
-            baseCurrencyId: 'id-' . $baseCode,
+            baseCurrencyId: 'id-'.$baseCode,
             baseCurrencyCode: $baseCode,
-            quoteCurrencyId: 'id-' . $quoteCode,
+            quoteCurrencyId: 'id-'.$quoteCode,
             quoteCurrencyCode: $quoteCode,
             source: FxSource::FRANKFURTER,
             isActive: true,
         );
     }
 
-    public function testFetchRatesReturnsDirectRate(): void
+    public function test_fetch_rates_returns_direct_rate(): void
     {
         Http::fake(['*frankfurter.app*' => Http::response([
             'amount' => 1.0,
@@ -37,7 +37,7 @@ class FrankfurterRateProviderTest extends TestCase
             'rates' => ['EUR' => 0.92],
         ], 200)]);
 
-        $rates = (new FrankfurterRateProvider())->fetchRates(new Collection([$this->pair('USD', 'EUR')]));
+        $rates = (new FrankfurterRateProvider)->fetchRates(new Collection([$this->pair('USD', 'EUR')]));
 
         $this->assertCount(1, $rates);
         $rate = $rates->first();
@@ -48,11 +48,11 @@ class FrankfurterRateProviderTest extends TestCase
         $this->assertSame(FxSource::FRANKFURTER, $rate->source);
     }
 
-    public function testSkipsWhenSymbolMissingOrRequestFails(): void
+    public function test_skips_when_symbol_missing_or_request_fails(): void
     {
         Http::fake(['*frankfurter.app*' => Http::response(['amount' => 1.0, 'base' => 'USD', 'date' => '2026-07-17', 'rates' => []], 200)]);
 
-        $rates = (new FrankfurterRateProvider())->fetchRates(new Collection([$this->pair('USD', 'EUR')]));
+        $rates = (new FrankfurterRateProvider)->fetchRates(new Collection([$this->pair('USD', 'EUR')]));
 
         $this->assertCount(0, $rates);
     }

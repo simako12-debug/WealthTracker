@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Http;
 final readonly class CnbRateProvider implements RateProviderInterface
 {
     private const string URL = 'https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt';
+
     private const string CZK = 'CZK';
+
     private const int SCALE = 10;
 
     public function source(): FxSource
@@ -31,7 +33,7 @@ final readonly class CnbRateProvider implements RateProviderInterface
         $response = Http::get(self::URL);
 
         if ($response->failed() === true) {
-            return new Collection();
+            return new Collection;
         }
 
         [$date, $perUnit] = $this->parse($response->body());
@@ -85,7 +87,7 @@ final readonly class CnbRateProvider implements RateProviderInterface
         $datePart = trim(explode('#', $header)[0]);
         $date = CarbonImmutable::createFromFormat('d.m.Y', $datePart)->startOfDay();
 
-        array_shift($lines); // column header "zemlje|měna|množství|kód|kurz"
+        array_shift($lines); // column header "země|měna|množství|kód|kurz"
 
         $perUnit = [];
         foreach ($lines as $line) {

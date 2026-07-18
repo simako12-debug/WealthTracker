@@ -20,21 +20,21 @@ class CnbRateProviderTest extends TestCase
     private function pair(string $baseCode, string $quoteCode): CurrencyPairData
     {
         return new CurrencyPairData(
-            id: 'pair-' . $baseCode . $quoteCode,
-            baseCurrencyId: 'id-' . $baseCode,
+            id: 'pair-'.$baseCode.$quoteCode,
+            baseCurrencyId: 'id-'.$baseCode,
             baseCurrencyCode: $baseCode,
-            quoteCurrencyId: 'id-' . $quoteCode,
+            quoteCurrencyId: 'id-'.$quoteCode,
             quoteCurrencyCode: $quoteCode,
             source: FxSource::CNB,
             isActive: true,
         );
     }
 
-    public function testFetchRatesForForeignToCzkWithUnitNormalization(): void
+    public function test_fetch_rates_for_foreign_to_czk_with_unit_normalization(): void
     {
         Http::fake(['*cnb.cz*' => Http::response(self::BODY, 200)]);
 
-        $rates = (new CnbRateProvider())->fetchRates(new Collection([
+        $rates = (new CnbRateProvider)->fetchRates(new Collection([
             $this->pair('USD', 'CZK'),
             $this->pair('JPY', 'CZK'),
         ]));
@@ -51,21 +51,21 @@ class CnbRateProviderTest extends TestCase
         $this->assertSame('0.1500000000', $jpy->rate);
     }
 
-    public function testFetchRatesInvertsCzkToForeign(): void
+    public function test_fetch_rates_inverts_czk_to_foreign(): void
     {
         Http::fake(['*cnb.cz*' => Http::response(self::BODY, 200)]);
 
-        $rates = (new CnbRateProvider())->fetchRates(new Collection([$this->pair('CZK', 'USD')]));
+        $rates = (new CnbRateProvider)->fetchRates(new Collection([$this->pair('CZK', 'USD')]));
 
         $this->assertCount(1, $rates);
         $this->assertSame('0.0432900432', $rates->first()->rate);
     }
 
-    public function testSkipsUnknownCurrencyAndNonCzkPairs(): void
+    public function test_skips_unknown_currency_and_non_czk_pairs(): void
     {
         Http::fake(['*cnb.cz*' => Http::response(self::BODY, 200)]);
 
-        $rates = (new CnbRateProvider())->fetchRates(new Collection([
+        $rates = (new CnbRateProvider)->fetchRates(new Collection([
             $this->pair('GBP', 'CZK'),
             $this->pair('USD', 'EUR'),
         ]));
@@ -73,11 +73,11 @@ class CnbRateProviderTest extends TestCase
         $this->assertCount(0, $rates);
     }
 
-    public function testReturnsEmptyOnHttpFailure(): void
+    public function test_returns_empty_on_http_failure(): void
     {
         Http::fake(['*cnb.cz*' => Http::response('', 500)]);
 
-        $rates = (new CnbRateProvider())->fetchRates(new Collection([$this->pair('USD', 'CZK')]));
+        $rates = (new CnbRateProvider)->fetchRates(new Collection([$this->pair('USD', 'CZK')]));
 
         $this->assertCount(0, $rates);
     }

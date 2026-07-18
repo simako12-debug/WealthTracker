@@ -15,6 +15,5 @@ final class FxSyncResult extends Data
         public int $synced,
         public int $skipped,
         public array $messages,
-    ) {
-    }
+    ) {}
 }

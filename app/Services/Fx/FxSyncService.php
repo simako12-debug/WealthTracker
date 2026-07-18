@@ -20,8 +20,7 @@ final readonly class FxSyncService
         private CurrencyPairRepositoryInterface $pairs,
         private FxRateRepositoryInterface $rates,
         private array $providers,
-    ) {
-    }
+    ) {}
 
     public function sync(): FxSyncResult
     {

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Http;
 final readonly class FrankfurterRateProvider implements RateProviderInterface
 {
     private const string URL = 'https://api.frankfurter.app/latest';
+
     private const int SCALE = 10;
 
     public function source(): FxSource
@@ -44,7 +45,7 @@ final readonly class FrankfurterRateProvider implements RateProviderInterface
             return null;
         }
 
-        $value = $response->json('rates.' . $pair->quoteCurrencyCode);
+        $value = $response->json('rates.'.$pair->quoteCurrencyCode);
         $date = $response->json('date');
 
         if ($value === null || $date === null) {
