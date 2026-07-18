@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\ManageCurrencies;
 use App\Livewire\ManageInstitutions;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/institutions', ManageInstitutions::class)->name('institutions');
+    Route::get('/currencies', ManageCurrencies::class)->name('currencies');
 });
 
 require __DIR__.'/auth.php';
