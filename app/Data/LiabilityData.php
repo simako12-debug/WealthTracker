@@ -19,13 +19,12 @@ final class LiabilityData extends Data
         public string $name,
         public string $principalAmount,
         public string $interestRate,
-        public null|string $monthlyPayment,
+        public ?string $monthlyPayment,
         public CarbonImmutable $startDate,
-        public null|CarbonImmutable $endDate,
+        public ?CarbonImmutable $endDate,
         public bool $isActive,
-        public null|string $note,
-    ) {
-    }
+        public ?string $note,
+    ) {}
 
     public static function fromModel(Liability $liability): self
     {

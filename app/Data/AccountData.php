@@ -19,9 +19,8 @@ final class AccountData extends Data
         public string $name,
         public AccountType $type,
         public bool $isActive,
-        public null|string $note,
-    ) {
-    }
+        public ?string $note,
+    ) {}
 
     public static function fromModel(Account $account): self
     {

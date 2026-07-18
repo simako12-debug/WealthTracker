@@ -8,12 +8,13 @@ use App\Data\LiabilityData;
 use App\Models\Currency;
 use App\Models\Institution;
 use App\Models\Liability;
+use App\Repositories\LiabilityRepository;
 use App\Repositories\LiabilityRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
-#[CoversClass(\App\Repositories\LiabilityRepository::class)]
+#[CoversClass(LiabilityRepository::class)]
 class LiabilityRepositoryTest extends TestCase
 {
     use RefreshDatabase;

@@ -9,12 +9,13 @@ use App\Enums\AccountType;
 use App\Models\Account;
 use App\Models\Currency;
 use App\Models\Institution;
+use App\Repositories\AccountRepository;
 use App\Repositories\AccountRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
-#[CoversClass(\App\Repositories\AccountRepository::class)]
+#[CoversClass(AccountRepository::class)]
 class AccountRepositoryTest extends TestCase
 {
     use RefreshDatabase;

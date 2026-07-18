@@ -6,12 +6,13 @@ namespace Tests\Unit\Repositories;
 
 use App\Data\InstitutionData;
 use App\Models\Institution;
+use App\Repositories\InstitutionRepository;
 use App\Repositories\InstitutionRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
-#[CoversClass(\App\Repositories\InstitutionRepository::class)]
+#[CoversClass(InstitutionRepository::class)]
 class InstitutionRepositoryAllTest extends TestCase
 {
     use RefreshDatabase;

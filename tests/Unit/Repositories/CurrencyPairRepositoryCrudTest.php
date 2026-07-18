@@ -8,12 +8,13 @@ use App\Data\CurrencyPairData;
 use App\Enums\FxSource;
 use App\Models\Currency;
 use App\Models\CurrencyPair;
+use App\Repositories\CurrencyPairRepository;
 use App\Repositories\CurrencyPairRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
-#[CoversClass(\App\Repositories\CurrencyPairRepository::class)]
+#[CoversClass(CurrencyPairRepository::class)]
 class CurrencyPairRepositoryCrudTest extends TestCase
 {
     use RefreshDatabase;
