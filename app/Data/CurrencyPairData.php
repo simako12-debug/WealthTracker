@@ -18,6 +18,7 @@ final class CurrencyPairData extends Data
         public string $quoteCurrencyCode,
         public FxSource $source,
         public bool $isActive,
+        public ?string $note = null,
     ) {}
 
     public static function fromModel(CurrencyPair $pair): self
@@ -30,6 +31,7 @@ final class CurrencyPairData extends Data
             quoteCurrencyCode: $pair->quoteCurrency->code,
             source: $pair->source,
             isActive: $pair->is_active,
+            note: $pair->note,
         );
     }
 }
