@@ -15,6 +15,12 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'seed_user' => [
+        'name' => env('SEED_USER_NAME', 'Owner'),
+        'email' => env('SEED_USER_EMAIL', 'owner@example.test'),
+        'password' => env('SEED_USER_PASSWORD', 'changeme'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
