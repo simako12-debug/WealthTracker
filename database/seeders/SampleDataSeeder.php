@@ -20,12 +20,22 @@ class SampleDataSeeder extends Seeder
     public function run(): void
     {
         $currencies = [];
-        foreach ([['CZK', 'Czech koruna'], ['EUR', 'Euro'], ['USD', 'US dollar'], ['GBP', 'Pound sterling']] as [$code, $name]) {
+        $currencyList = [
+            ['CZK', 'Czech koruna'],
+            ['EUR', 'Euro'],
+            ['USD', 'US dollar'],
+            ['GBP', 'Pound sterling'],
+        ];
+        foreach ($currencyList as [$code, $name]) {
             $currencies[$code] = Currency::query()->updateOrCreate(['code' => $code], ['name' => $name]);
         }
 
         $institutions = [];
-        foreach ([['fio', 'Fio banka', InstitutionType::BANK], ['etoro', 'eToro', InstitutionType::BROKER]] as [$key, $name, $type]) {
+        $institutionList = [
+            ['fio', 'Fio banka', InstitutionType::BANK],
+            ['etoro', 'eToro', InstitutionType::BROKER],
+        ];
+        foreach ($institutionList as [$key, $name, $type]) {
             $institutions[$key] = Institution::query()->updateOrCreate(['name' => $name], ['type' => $type]);
         }
 

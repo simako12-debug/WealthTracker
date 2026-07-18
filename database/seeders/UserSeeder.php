@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
         /** @var array{name:string,email:string,password:string} $config */
         $config = config('app.seed_user');
 
-        if (empty($config['password'])) {
+        if (empty($config['password']) === true) {
             throw new \RuntimeException('SEED_USER_PASSWORD must be set');
         }
 
