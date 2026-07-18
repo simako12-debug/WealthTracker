@@ -25,10 +25,10 @@ class SampleDataSeederTest extends TestCase
 
         $this->assertSame(4, Currency::query()->count());
         $this->assertNotNull(Currency::query()->where('code', 'CZK')->first());
-        $this->assertGreaterThanOrEqual(2, Institution::query()->count());
-        $this->assertGreaterThanOrEqual(3, Account::query()->count());
+        $this->assertSame(2, Institution::query()->count());
+        $this->assertSame(3, Account::query()->count());
         $this->assertSame(3, CurrencyPair::query()->count());
-        $this->assertGreaterThanOrEqual(1, Transaction::query()->count());
+        $this->assertSame(3, Transaction::query()->count());
     }
 
     public function testSeederIsIdempotentForCurrencies(): void

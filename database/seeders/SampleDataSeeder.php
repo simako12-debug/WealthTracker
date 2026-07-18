@@ -24,27 +24,22 @@ class SampleDataSeeder extends Seeder
             $currencies[$code] = Currency::query()->updateOrCreate(['code' => $code], ['name' => $name]);
         }
 
-        $fio = Institution::query()->updateOrCreate(
-            ['name' => 'Fio banka'],
-            ['type' => InstitutionType::BANK],
-        );
-        $etoro = Institution::query()->updateOrCreate(
-            ['name' => 'eToro'],
-            ['type' => InstitutionType::BROKER],
-        );
+        $institutions = [];
+        foreach ([['fio', 'Fio banka', InstitutionType::BANK], ['etoro', 'eToro', InstitutionType::BROKER]] as [$key, $name, $type]) {
+            $institutions[$key] = Institution::query()->updateOrCreate(['name' => $name], ['type' => $type]);
+        }
 
-        $fioAccount = Account::query()->updateOrCreate(
-            ['institution_id' => $fio->id, 'name' => 'Fio běžný účet'],
-            ['currency_id' => $currencies['CZK']->id, 'type' => AccountType::BANK, 'is_active' => true],
-        );
-        Account::query()->updateOrCreate(
-            ['institution_id' => $fio->id, 'name' => 'Fio spořicí účet'],
-            ['currency_id' => $currencies['CZK']->id, 'type' => AccountType::SAVINGS, 'is_active' => true],
-        );
-        Account::query()->updateOrCreate(
-            ['institution_id' => $etoro->id, 'name' => 'eToro USD'],
-            ['currency_id' => $currencies['USD']->id, 'type' => AccountType::INVESTMENT, 'is_active' => true],
-        );
+        $accounts = [];
+        foreach ([
+            ['fio_checking', 'fio', 'Fio běžný účet', 'CZK', AccountType::BANK],
+            ['fio_savings', 'fio', 'Fio spořicí účet', 'CZK', AccountType::SAVINGS],
+            ['etoro_usd', 'etoro', 'eToro USD', 'USD', AccountType::INVESTMENT],
+        ] as [$key, $institutionKey, $name, $currencyCode, $type]) {
+            $accounts[$key] = Account::query()->updateOrCreate(
+                ['institution_id' => $institutions[$institutionKey]->id, 'name' => $name],
+                ['currency_id' => $currencies[$currencyCode]->id, 'type' => $type, 'is_active' => true],
+            );
+        }
 
         $pairs = [
             ['USD', 'CZK', FxSource::CNB],
@@ -61,9 +56,9 @@ class SampleDataSeeder extends Seeder
             );
         }
 
-        if (Transaction::query()->where('account_id', $fioAccount->id)->doesntExist()) {
+        if (Transaction::query()->where('account_id', $accounts['fio_checking']->id)->doesntExist()) {
             Transaction::factory()->count(3)->create([
-                'account_id' => $fioAccount->id,
+                'account_id' => $accounts['fio_checking']->id,
                 'type' => TransactionType::DEPOSIT,
             ]);
         }
