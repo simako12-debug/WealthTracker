@@ -5,12 +5,12 @@ datasources:
     type: postgres
     access: proxy
     url: pgsql:5432
-    user: sail
+    user: grafana_ro
     isDefault: true
     jsonData:
       database: wealthtracker
       sslmode: disable
       postgresVersion: 1700
     secureJsonData:
-      password: password
-    editable: true
+      password: $GRAFANA_DB_PASSWORD
+    editable: false
