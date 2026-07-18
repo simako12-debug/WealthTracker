@@ -63,6 +63,12 @@ class ManageInstitutions extends Component
         $repository->delete($id);
     }
 
+    public function cancel(): void
+    {
+        $this->form->reset();
+        $this->showModal = false;
+    }
+
     public function sortBy(string $field): void
     {
         if ($this->sortField === $field) {

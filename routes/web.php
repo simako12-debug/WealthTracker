@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\ManageInstitutions;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/institutions', \App\Livewire\ManageInstitutions::class)->name('institutions');
+    Route::get('/institutions', ManageInstitutions::class)->name('institutions');
 });
 
 require __DIR__.'/auth.php';

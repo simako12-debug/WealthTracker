@@ -7,13 +7,14 @@ namespace Tests\Unit\Repositories;
 use App\Data\InstitutionData;
 use App\Enums\InstitutionType;
 use App\Models\Institution;
+use App\Repositories\InstitutionRepository;
 use App\Repositories\InstitutionRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
-#[CoversClass(\App\Repositories\InstitutionRepository::class)]
+#[CoversClass(InstitutionRepository::class)]
 class InstitutionRepositoryTest extends TestCase
 {
     use RefreshDatabase;
@@ -23,7 +24,7 @@ class InstitutionRepositoryTest extends TestCase
         return $this->app->make(InstitutionRepositoryInterface::class);
     }
 
-    public function testPaginateReturnsDataObjects(): void
+    public function test_paginate_returns_data_objects(): void
     {
         Institution::factory()->create(['name' => 'Alpha']);
         Institution::factory()->create(['name' => 'Beta']);
@@ -36,7 +37,7 @@ class InstitutionRepositoryTest extends TestCase
         $this->assertSame('Alpha', $page->items()[0]->name);
     }
 
-    public function testCreatePersistsAndReturnsData(): void
+    public function test_create_persists_and_returns_data(): void
     {
         $data = $this->repository()->create([
             'name' => 'Fio banka',
@@ -50,7 +51,7 @@ class InstitutionRepositoryTest extends TestCase
         $this->assertDatabaseHas('institutions', ['name' => 'Fio banka', 'type' => 'bank']);
     }
 
-    public function testUpdateChangesRow(): void
+    public function test_update_changes_row(): void
     {
         $institution = Institution::factory()->create(['name' => 'Old', 'type' => InstitutionType::BANK]);
 
@@ -65,7 +66,7 @@ class InstitutionRepositoryTest extends TestCase
         $this->assertDatabaseHas('institutions', ['id' => $institution->id, 'name' => 'New', 'type' => 'broker']);
     }
 
-    public function testFindAndDelete(): void
+    public function test_find_and_delete(): void
     {
         $institution = Institution::factory()->create();
 

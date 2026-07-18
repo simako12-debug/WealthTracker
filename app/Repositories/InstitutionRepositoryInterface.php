@@ -9,6 +9,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface InstitutionRepositoryInterface
 {
+    /** @return LengthAwarePaginator<int, InstitutionData> */
     public function paginate(string $sortField, string $sortDirection, int $perPage): LengthAwarePaginator;
 
     public function find(string $id): ?InstitutionData;

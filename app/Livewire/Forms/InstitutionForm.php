@@ -11,13 +11,13 @@ use Livewire\Form;
 
 class InstitutionForm extends Form
 {
-    public null|string $id = null;
+    public ?string $id = null;
 
     public string $name = '';
 
-    public null|string $type = null;
+    public ?string $type = null;
 
-    public null|string $note = null;
+    public ?string $note = null;
 
     /** @return array<string, mixed> */
     public function rules(): array

@@ -23,12 +23,12 @@ class ManageInstitutionsTest extends TestCase
         return User::factory()->create();
     }
 
-    public function testGuestCannotAccessRoute(): void
+    public function test_guest_cannot_access_route(): void
     {
         $this->get('/institutions')->assertRedirect('/login');
     }
 
-    public function testListsInstitutions(): void
+    public function test_lists_institutions(): void
     {
         Institution::factory()->create(['name' => 'Fio banka']);
 
@@ -38,7 +38,7 @@ class ManageInstitutionsTest extends TestCase
             ->assertSee('Fio banka');
     }
 
-    public function testCreateInstitution(): void
+    public function test_create_institution(): void
     {
         Livewire::actingAs($this->actingUser())
             ->test(ManageInstitutions::class)
@@ -52,7 +52,7 @@ class ManageInstitutionsTest extends TestCase
         $this->assertDatabaseHas('institutions', ['name' => 'eToro', 'type' => 'broker']);
     }
 
-    public function testValidationFailsWithoutName(): void
+    public function test_validation_fails_without_name(): void
     {
         Livewire::actingAs($this->actingUser())
             ->test(ManageInstitutions::class)
@@ -63,7 +63,7 @@ class ManageInstitutionsTest extends TestCase
             ->assertHasErrors(['form.name']);
     }
 
-    public function testEditInstitution(): void
+    public function test_edit_institution(): void
     {
         $institution = Institution::factory()->create(['name' => 'Old', 'type' => InstitutionType::BANK]);
 
@@ -78,7 +78,7 @@ class ManageInstitutionsTest extends TestCase
         $this->assertDatabaseHas('institutions', ['id' => $institution->id, 'name' => 'Renamed']);
     }
 
-    public function testDeleteInstitution(): void
+    public function test_delete_institution(): void
     {
         $institution = Institution::factory()->create();
 

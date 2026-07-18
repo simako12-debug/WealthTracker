@@ -23,11 +23,11 @@
                     @foreach ($institutions as $institution)
                         <tr wire:key="institution-{{ $institution->id }}">
                             <td class="px-4 py-3 text-sm">{{ $institution->name }}</td>
-                            <td class="px-4 py-3 text-sm">{{ ucfirst($institution->type->value) }}</td>
+                            <td class="px-4 py-3 text-sm">{{ $institution->type->label() }}</td>
                             <td class="px-4 py-3 text-sm">{{ $institution->note }}</td>
                             <td class="px-4 py-3 text-right text-sm">
-                                <button wire:click="edit('{{ $institution->id }}')" class="text-indigo-600 hover:underline">Edit</button>
-                                <button wire:click="delete('{{ $institution->id }}')" wire:confirm="Delete this institution?" class="ml-3 text-red-600 hover:underline">Delete</button>
+                                <button wire:click="edit(@js($institution->id))" class="text-indigo-600 hover:underline">Edit</button>
+                                <button wire:click="delete(@js($institution->id))" wire:confirm="Delete this institution?" class="ml-3 text-red-600 hover:underline">Delete</button>
                             </td>
                         </tr>
                     @endforeach
@@ -54,7 +54,7 @@
                     <select id="type" wire:model="form.type" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900">
                         <option value="">—</option>
                         @foreach ($types as $type)
-                            <option value="{{ $type->value }}">{{ ucfirst($type->value) }}</option>
+                            <option value="{{ $type->value }}">{{ $type->label() }}</option>
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('form.type')" class="mt-2" />
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="flex justify-end gap-3">
-                    <x-secondary-button type="button" wire:click="$set('showModal', false)">Cancel</x-secondary-button>
+                    <x-secondary-button type="button" wire:click="cancel">Cancel</x-secondary-button>
                     <x-primary-button>Save</x-primary-button>
                 </div>
             </form>

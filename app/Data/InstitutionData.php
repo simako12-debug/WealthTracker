@@ -14,9 +14,8 @@ final class InstitutionData extends Data
         public string $id,
         public string $name,
         public InstitutionType $type,
-        public null|string $note,
-    ) {
-    }
+        public ?string $note,
+    ) {}
 
     public static function fromModel(Institution $institution): self
     {

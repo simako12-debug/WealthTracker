@@ -12,6 +12,7 @@ final readonly class InstitutionRepository implements InstitutionRepositoryInter
 {
     private const array SORTABLE = ['name', 'type', 'created_at'];
 
+    /** @return LengthAwarePaginator<int, InstitutionData> */
     public function paginate(string $sortField, string $sortDirection, int $perPage): LengthAwarePaginator
     {
         $field = in_array($sortField, self::SORTABLE, true) === true ? $sortField : 'name';
