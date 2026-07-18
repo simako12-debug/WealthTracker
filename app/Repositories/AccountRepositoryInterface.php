@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Data\AccountData;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface AccountRepositoryInterface
 {
@@ -13,6 +14,9 @@ interface AccountRepositoryInterface
     public function paginate(string $sortField, string $sortDirection, int $perPage): LengthAwarePaginator;
 
     public function find(string $id): ?AccountData;
+
+    /** @return Collection<int, AccountData> */
+    public function forInstitution(string $institutionId): Collection;
 
     /** @param array<string, mixed> $attributes */
     public function create(array $attributes): AccountData;

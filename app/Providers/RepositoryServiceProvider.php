@@ -16,6 +16,8 @@ use App\Repositories\InstitutionRepository;
 use App\Repositories\InstitutionRepositoryInterface;
 use App\Repositories\LiabilityRepository;
 use App\Repositories\LiabilityRepositoryInterface;
+use App\Repositories\TransactionRepository;
+use App\Repositories\TransactionRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -28,5 +30,6 @@ class RepositoryServiceProvider extends ServiceProvider
         InstitutionRepositoryInterface::class => InstitutionRepository::class,
         AccountRepositoryInterface::class => AccountRepository::class,
         LiabilityRepositoryInterface::class => LiabilityRepository::class,
+        TransactionRepositoryInterface::class => TransactionRepository::class,
     ];
 }
