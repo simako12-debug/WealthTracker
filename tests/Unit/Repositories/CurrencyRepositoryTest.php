@@ -6,12 +6,13 @@ namespace Tests\Unit\Repositories;
 
 use App\Data\CurrencyData;
 use App\Models\Currency;
+use App\Repositories\CurrencyRepository;
 use App\Repositories\CurrencyRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\TestCase;
 
-#[CoversClass(\App\Repositories\CurrencyRepository::class)]
+#[CoversClass(CurrencyRepository::class)]
 class CurrencyRepositoryTest extends TestCase
 {
     use RefreshDatabase;
@@ -21,7 +22,7 @@ class CurrencyRepositoryTest extends TestCase
         return $this->app->make(CurrencyRepositoryInterface::class);
     }
 
-    public function testFindByCodeReturnsDataObject(): void
+    public function test_find_by_code_returns_data_object(): void
     {
         Currency::factory()->create(['code' => 'USD', 'name' => 'US dollar']);
 
@@ -32,12 +33,12 @@ class CurrencyRepositoryTest extends TestCase
         $this->assertSame('US dollar', $data->name);
     }
 
-    public function testFindByCodeReturnsNullWhenMissing(): void
+    public function test_find_by_code_returns_null_when_missing(): void
     {
         $this->assertNull($this->repository()->findByCode('ZZZ'));
     }
 
-    public function testAllReturnsCollectionOfDataObjects(): void
+    public function test_all_returns_collection_of_data_objects(): void
     {
         Currency::factory()->create(['code' => 'CZK']);
         Currency::factory()->create(['code' => 'EUR']);

@@ -18,8 +18,7 @@ final class CurrencyPairData extends Data
         public string $quoteCurrencyCode,
         public FxSource $source,
         public bool $isActive,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(CurrencyPair $pair): self
     {

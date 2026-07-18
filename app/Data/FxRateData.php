@@ -12,14 +12,13 @@ use Spatie\LaravelData\Data;
 final class FxRateData extends Data
 {
     public function __construct(
-        public null|string $id,
+        public ?string $id,
         public string $currencyFromId,
         public string $currencyToId,
         public string $rate,
         public CarbonImmutable $rateDate,
         public FxSource $source,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(FxRate $rate): self
     {

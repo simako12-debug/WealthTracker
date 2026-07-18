@@ -17,13 +17,12 @@ final readonly class CurrencyConverter
     public function __construct(
         private CurrencyRepositoryInterface $currencies,
         private FxRateRepositoryInterface $rates,
-    ) {
-    }
+    ) {}
 
     public function toCzk(string $amount, Currency $from, CarbonImmutable $date): ?ConversionResult
     {
         if ($from->code === self::CZK) {
-            return new ConversionResult(amount: $amount, rate: '1', rateDate: $date);
+            return new ConversionResult(amount: $amount, rate: '1.0000000000', rateDate: $date);
         }
 
         $czk = $this->currencies->findByCode(self::CZK);

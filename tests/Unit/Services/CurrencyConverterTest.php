@@ -24,7 +24,7 @@ class CurrencyConverterTest extends TestCase
         return $this->app->make(CurrencyConverter::class);
     }
 
-    public function testCzkToCzkIsIdentity(): void
+    public function test_czk_to_czk_is_identity(): void
     {
         $czk = Currency::factory()->create(['code' => 'CZK']);
 
@@ -32,10 +32,10 @@ class CurrencyConverterTest extends TestCase
 
         $this->assertInstanceOf(ConversionResult::class, $result);
         $this->assertSame('1500.0000000000', $result->amount);
-        $this->assertSame('1', $result->rate);
+        $this->assertSame('1.0000000000', $result->rate);
     }
 
-    public function testConvertsUsingLatestRateOnOrBeforeDate(): void
+    public function test_converts_using_latest_rate_on_or_before_date(): void
     {
         $usd = Currency::factory()->create(['code' => 'USD']);
         $czk = Currency::factory()->create(['code' => 'CZK']);
@@ -55,7 +55,7 @@ class CurrencyConverterTest extends TestCase
         $this->assertSame('2026-03-10', $result->rateDate->toDateString());
     }
 
-    public function testReturnsNullWhenNoRateAvailable(): void
+    public function test_returns_null_when_no_rate_available(): void
     {
         $usd = Currency::factory()->create(['code' => 'USD']);
         Currency::factory()->create(['code' => 'CZK']);

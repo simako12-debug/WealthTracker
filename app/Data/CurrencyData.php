@@ -13,8 +13,7 @@ final class CurrencyData extends Data
         public string $id,
         public string $code,
         public string $name,
-    ) {
-    }
+    ) {}
 
     public static function fromModel(Currency $currency): self
     {

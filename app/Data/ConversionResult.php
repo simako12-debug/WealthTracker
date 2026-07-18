@@ -13,6 +13,5 @@ final class ConversionResult extends Data
         public string $amount,
         public string $rate,
         public CarbonImmutable $rateDate,
-    ) {
-    }
+    ) {}
 }
