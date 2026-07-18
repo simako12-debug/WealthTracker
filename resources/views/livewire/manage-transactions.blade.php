@@ -36,50 +36,46 @@
                         @endif
                     </div>
 
-                    @if ($selectedAccount !== null)
-                        <div>
-                            <x-input-label for="type" value="Type" />
-                            <select id="type" wire:model="form.type" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-                                <option value="">—</option>
-                                @foreach ($types as $type)
-                                    <option value="{{ $type->value }}">{{ $type->label() }}</option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('form.type')" class="mt-2" />
-                        </div>
+                    <div>
+                        <x-input-label for="type" value="Type" />
+                        <select id="type" wire:model="form.type" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900">
+                            <option value="">—</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->value }}">{{ $type->label() }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('form.type')" class="mt-2" />
+                    </div>
 
-                        <div>
-                            <x-input-label for="amount" value="Amount" />
-                            <x-text-input id="amount" type="text" inputmode="decimal" wire:model.live="form.amount" class="mt-1 block w-full" />
-                            <x-input-error :messages="$errors->get('form.amount')" class="mt-2" />
-                            @if ($preview !== null)
-                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">≈ {{ number_format((float) $preview->amount, 2) }} CZK</p>
-                            @elseif (filled($form->amount))
-                                <span class="mt-1 text-sm text-red-500">rate unavailable</span>
-                            @endif
-                        </div>
+                    <div>
+                        <x-input-label for="amount" value="Amount" />
+                        <x-text-input id="amount" type="text" inputmode="decimal" wire:model.live="form.amount" class="mt-1 block w-full" />
+                        <x-input-error :messages="$errors->get('form.amount')" class="mt-2" />
+                        @if ($preview !== null)
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">≈ {{ number_format((float) $preview->amount, 2) }} CZK</p>
+                        @elseif ($selectedAccount !== null && filled($form->amount))
+                            <span class="mt-1 text-sm text-red-500">rate unavailable</span>
+                        @endif
+                    </div>
 
-                        <div>
-                            <x-input-label for="transactionDate" value="Date" />
-                            <input id="transactionDate" type="date" wire:model.live="form.transactionDate" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900" />
-                            <x-input-error :messages="$errors->get('form.transactionDate')" class="mt-2" />
-                        </div>
+                    <div>
+                        <x-input-label for="transactionDate" value="Date" />
+                        <input id="transactionDate" type="date" wire:model.live="form.transactionDate" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900" />
+                        <x-input-error :messages="$errors->get('form.transactionDate')" class="mt-2" />
+                    </div>
 
-                        <div>
-                            <x-input-label for="counterparty" value="Counterparty" />
-                            <x-text-input id="counterparty" wire:model="form.counterparty" class="mt-1 block w-full" />
-                            <x-input-error :messages="$errors->get('form.counterparty')" class="mt-2" />
-                        </div>
-                    @endif
+                    <div>
+                        <x-input-label for="counterparty" value="Counterparty" />
+                        <x-text-input id="counterparty" wire:model="form.counterparty" class="mt-1 block w-full" />
+                        <x-input-error :messages="$errors->get('form.counterparty')" class="mt-2" />
+                    </div>
                 </div>
 
-                @if ($selectedAccount !== null)
-                    <div>
-                        <x-input-label for="note" value="Note" />
-                        <textarea id="note" wire:model="form.note" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900"></textarea>
-                        <x-input-error :messages="$errors->get('form.note')" class="mt-2" />
-                    </div>
-                @endif
+                <div>
+                    <x-input-label for="note" value="Note" />
+                    <textarea id="note" wire:model="form.note" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900"></textarea>
+                    <x-input-error :messages="$errors->get('form.note')" class="mt-2" />
+                </div>
 
                 <div class="flex justify-end">
                     <x-primary-button>{{ $form->id === null ? 'Save' : 'Update' }}</x-primary-button>

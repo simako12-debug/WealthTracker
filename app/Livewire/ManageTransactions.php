@@ -71,9 +71,9 @@ class ManageTransactions extends Component
         $transactions->delete($id);
     }
 
-    private function preview(): ?ConversionResult
+    private function preview(?AccountData $account, CurrencyConverter $converter): ?ConversionResult
     {
-        if ($this->form->accountId === null || $this->form->amount === null || $this->form->transactionDate === null) {
+        if ($account === null || $this->form->amount === null || $this->form->transactionDate === null) {
             return null;
         }
 
@@ -81,13 +81,7 @@ class ManageTransactions extends Component
             return null;
         }
 
-        $account = app(AccountRepositoryInterface::class)->find($this->form->accountId);
-
-        if ($account === null) {
-            return null;
-        }
-
-        return app(CurrencyConverter::class)->toCzkByCode(
+        return $converter->toCzkByCode(
             (string) $this->form->amount,
             $account->currencyCode,
             CarbonImmutable::parse($this->form->transactionDate),
@@ -98,6 +92,7 @@ class ManageTransactions extends Component
         TransactionRepositoryInterface $transactions,
         AccountRepositoryInterface $accounts,
         InstitutionRepositoryInterface $institutions,
+        CurrencyConverter $converter,
     ): View {
         /** @var Collection<int, AccountData> $accountOptions */
         $accountOptions = $this->form->institutionId === null
@@ -110,7 +105,7 @@ class ManageTransactions extends Component
             'institutions' => $institutions->all(),
             'accountOptions' => $accountOptions,
             'selectedAccount' => $selectedAccount,
-            'preview' => $this->preview(),
+            'preview' => $this->preview($selectedAccount, $converter),
             'types' => TransactionType::cases(),
             'recent' => $transactions->recent(15),
         ]);

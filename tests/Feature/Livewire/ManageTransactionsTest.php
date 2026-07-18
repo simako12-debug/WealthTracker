@@ -32,13 +32,27 @@ class ManageTransactionsTest extends TestCase
     {
         $institution = Institution::factory()->create();
         $account = Account::factory()->create(['institution_id' => $institution->id, 'name' => 'Fio CZK']);
-        Account::factory()->create(['name' => 'Other']); // different institution
+        Account::factory()->create(['name' => 'Unrelated Bank']); // different institution
 
         Livewire::actingAs(User::factory()->create())
             ->test(ManageTransactions::class)
             ->set('form.institutionId', $institution->id)
             ->assertSee('Fio CZK')
-            ->assertDontSee('Other');
+            ->assertDontSee('Unrelated Bank');
+    }
+
+    public function test_changing_institution_resets_selected_account(): void
+    {
+        $a = Institution::factory()->create();
+        $b = Institution::factory()->create();
+        $account = Account::factory()->create(['institution_id' => $a->id]);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ManageTransactions::class)
+            ->set('form.institutionId', $a->id)
+            ->set('form.accountId', $account->id)
+            ->set('form.institutionId', $b->id)
+            ->assertSet('form.accountId', null);
     }
 
     public function test_create_transaction_and_keep_account_selected(): void
@@ -80,7 +94,7 @@ class ManageTransactionsTest extends TestCase
             ->set('form.accountId', $account->id)
             ->set('form.amount', '10')
             ->set('form.transactionDate', '2026-03-15')
-            ->assertSee('230');
+            ->assertSee('230.00');
     }
 
     public function test_validation_requires_account_type_amount(): void
