@@ -32,8 +32,8 @@ Vše běží lokálně přes Docker Compose. Bez cloudu, bez externích SaaS na 
 
 ## 2. Tech stack
 
-- **Laravel** — nejnovější stabilní (12)
-- **Livewire 3** (Blade komponenty; ne Inertia/React)
+- **Laravel** — nejnovější stabilní (fakticky nainstalováno 13)
+- **Livewire 4** (Blade komponenty; ne Inertia/React) — potvrzeno uživatelem (původně zmíněno 3; nainstalováno a schváleno 4)
 - **PostgreSQL** — nejnovější stabilní (`postgres:17`+)
 - **PHP** — nejnovější stabilní (8.4, resp. 8.5 pokud vyšla; v Dockerfile nejnovější stable tag)
 - **Grafana** — poslední stable, oficiální docker image
