@@ -32,7 +32,7 @@ Vše běží lokálně přes Docker Compose. Bez cloudu, bez externích SaaS na 
 
 ## 2. Tech stack
 
-- **Laravel 11**
+- **Laravel** — nejnovější stabilní (12)
 - **Livewire 3** (Blade komponenty; ne Inertia/React)
 - **PostgreSQL** — nejnovější stabilní (`postgres:17`+)
 - **PHP** — nejnovější stabilní (8.4, resp. 8.5 pokud vyšla; v Dockerfile nejnovější stable tag)
@@ -61,7 +61,7 @@ Standardní Laravel layout: `app/Http/Livewire` (nebo `app/Livewire`), `app/Mode
 
 ## 4. Datový model
 
-Vše UUID PK (`HasUuids`). U každého FK sloupce vždy `->index()` vedle `->foreign()` (PostgreSQL index netvoří automaticky). `->nullable()` u volitelných sloupců. Peněžní částky `decimal(20,4)`, kurzy `decimal(20,10)` (≥ 8 desetinných míst).
+Vše UUID PK (`HasUuids`). U každého FK sloupce vždy `->index()` vedle `->foreign()` (PostgreSQL index netvoří automaticky). `->nullable()` u volitelných sloupců. Peněžní částky i kurzy jednotně `decimal(20,10)` (≥ 8 desetinných míst).
 
 ### `currencies`
 - `id` (uuid)
@@ -109,7 +109,7 @@ Historie kurzů (čistá časová řada na pár + zdroj + datum).
 - `id` (uuid)
 - `account_id` (FK)
 - `type` (enum: `deposit`, `withdrawal`, `dividend`, `interest`, `capital_gain`, `capital_loss`, `fee`, `bond_income`, `other`)
-- `amount` (decimal(20,4) — v měně účtu)
+- `amount` (decimal(20,10) — v měně účtu)
 - `transaction_date` (date)
 - `note` (text, nullable)
 - `counterparty` (string, nullable — např. ticker akcie, protistrana)
@@ -120,10 +120,10 @@ Strukturovaný dluh (hypotéka, půjčka). Do čistého jmění se **odečítá*
 - `id` (uuid)
 - `institution_id` (FK)
 - `name` (string — např. „Hypotéka byt Praha")
-- `principal_amount` (decimal(20,4) — původní jistina)
+- `principal_amount` (decimal(20,10) — původní jistina)
 - `currency_id` (FK)
 - `interest_rate` (decimal — roční úrok v %)
-- `monthly_payment` (decimal(20,4), nullable — pokud je fixní)
+- `monthly_payment` (decimal(20,10), nullable — pokud je fixní)
 - `start_date` (date)
 - `end_date` (date, nullable)
 - `is_active` (boolean, default true)
@@ -133,16 +133,16 @@ Strukturovaný dluh (hypotéka, půjčka). Do čistého jmění se **odečítá*
 - `id` (uuid)
 - `liability_id` (FK)
 - `payment_date` (date)
-- `total_amount` (decimal(20,4))
-- `principal_portion` (decimal(20,4), nullable)
-- `interest_portion` (decimal(20,4), nullable)
+- `total_amount` (decimal(20,10))
+- `principal_portion` (decimal(20,10), nullable)
+- `interest_portion` (decimal(20,10), nullable)
 - `note` (text, nullable)
 
 ### `account_balance_snapshots`
 Pravidelný zápis skutečné hodnoty účtu (hlavně investiční účty, kde cashflow ≠ hodnota portfolia).
 - `id` (uuid)
 - `account_id` (FK)
-- `balance` (decimal(20,4) — hodnota účtu v měně účtu)
+- `balance` (decimal(20,10) — hodnota účtu v měně účtu)
 - `snapshot_date` (date)
 - `note` (text, nullable)
 - unique `(account_id, snapshot_date)`
