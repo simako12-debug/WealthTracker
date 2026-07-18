@@ -14,6 +14,8 @@ use App\Repositories\FxRateRepository;
 use App\Repositories\FxRateRepositoryInterface;
 use App\Repositories\InstitutionRepository;
 use App\Repositories\InstitutionRepositoryInterface;
+use App\Repositories\LiabilityRepository;
+use App\Repositories\LiabilityRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -25,5 +27,6 @@ class RepositoryServiceProvider extends ServiceProvider
         FxRateRepositoryInterface::class => FxRateRepository::class,
         InstitutionRepositoryInterface::class => InstitutionRepository::class,
         AccountRepositoryInterface::class => AccountRepository::class,
+        LiabilityRepositoryInterface::class => LiabilityRepository::class,
     ];
 }
