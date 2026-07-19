@@ -66,4 +66,20 @@ final readonly class AccountRepository implements AccountRepositoryInterface
             ->get()
             ->map(fn (Account $account): AccountData => AccountData::fromModel($account));
     }
+
+    /** @return Collection<int, AccountData> */
+    public function active(): Collection
+    {
+        return Account::query()
+            ->with(['institution', 'currency'])
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Account $account): AccountData => AccountData::fromModel($account));
+    }
+
+    public function count(): int
+    {
+        return Account::query()->count();
+    }
 }

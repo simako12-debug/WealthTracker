@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Repositories\AccountBalanceSnapshotRepository;
+use App\Repositories\AccountBalanceSnapshotRepositoryInterface;
 use App\Repositories\AccountRepository;
 use App\Repositories\AccountRepositoryInterface;
 use App\Repositories\CurrencyPairRepository;
@@ -31,6 +33,7 @@ class RepositoryServiceProvider extends ServiceProvider
         FxRateRepositoryInterface::class => FxRateRepository::class,
         InstitutionRepositoryInterface::class => InstitutionRepository::class,
         AccountRepositoryInterface::class => AccountRepository::class,
+        AccountBalanceSnapshotRepositoryInterface::class => AccountBalanceSnapshotRepository::class,
         LiabilityRepositoryInterface::class => LiabilityRepository::class,
         LiabilityPaymentRepositoryInterface::class => LiabilityPaymentRepository::class,
         TransactionRepositoryInterface::class => TransactionRepository::class,
