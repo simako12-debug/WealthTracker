@@ -8,6 +8,7 @@ use App\Livewire\ManageCurrencies;
 use App\Livewire\ManageCurrencyPairs;
 use App\Livewire\ManageInstitutions;
 use App\Livewire\ManageLiabilities;
+use App\Livewire\ManageLiabilityPayments;
 use App\Livewire\ManageTransactions;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/currencies', ManageCurrencies::class)->name('currencies');
     Route::get('/accounts', ManageAccounts::class)->name('accounts');
     Route::get('/liabilities', ManageLiabilities::class)->name('liabilities');
+    Route::get('/liability-payments', ManageLiabilityPayments::class)->name('liability-payments');
     Route::get('/currency-pairs', ManageCurrencyPairs::class)->name('currency-pairs');
 });
 

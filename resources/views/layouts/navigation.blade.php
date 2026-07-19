@@ -30,6 +30,9 @@
                     <x-nav-link :href="route('liabilities')" :active="request()->routeIs('liabilities')">
                         {{ __('Liabilities') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('liability-payments')" :active="request()->routeIs('liability-payments')">
+                        {{ __('Liability Payments') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('currency-pairs')" :active="request()->routeIs('currency-pairs')">
                         {{ __('Currency Pairs') }}
                     </x-nav-link>
@@ -102,6 +105,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('liabilities')" :active="request()->routeIs('liabilities')">
                 {{ __('Liabilities') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('liability-payments')" :active="request()->routeIs('liability-payments')">
+                {{ __('Liability Payments') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('currency-pairs')" :active="request()->routeIs('currency-pairs')">
                 {{ __('Currency Pairs') }}
