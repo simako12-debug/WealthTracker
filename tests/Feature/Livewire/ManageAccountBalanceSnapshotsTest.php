@@ -69,11 +69,17 @@ class ManageAccountBalanceSnapshotsTest extends TestCase
         $user = User::factory()->create();
 
         Livewire::actingAs($user)->test(ManageAccountBalanceSnapshots::class)
-            ->set('form.accountId', $account->id)->set('form.balance', '100')->set('form.snapshotDate', '2026-03-31')
-            ->call('save')->assertHasNoErrors();
+            ->set('form.accountId', $account->id)
+            ->set('form.balance', '100')
+            ->set('form.snapshotDate', '2026-03-31')
+            ->call('save')
+            ->assertHasNoErrors();
         Livewire::actingAs($user)->test(ManageAccountBalanceSnapshots::class)
-            ->set('form.accountId', $account->id)->set('form.balance', '250')->set('form.snapshotDate', '2026-03-31')
-            ->call('save')->assertHasNoErrors();
+            ->set('form.accountId', $account->id)
+            ->set('form.balance', '250')
+            ->set('form.snapshotDate', '2026-03-31')
+            ->call('save')
+            ->assertHasNoErrors();
 
         $this->assertSame(1, AccountBalanceSnapshot::query()->count());
         $this->assertDatabaseHas('account_balance_snapshots', [
