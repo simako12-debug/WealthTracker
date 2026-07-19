@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('accounts')" :active="request()->routeIs('accounts')">
                         {{ __('Accounts') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('account-snapshots')" :active="request()->routeIs('account-snapshots')">
+                        {{ __('Balance Snapshots') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('liabilities')" :active="request()->routeIs('liabilities')">
                         {{ __('Liabilities') }}
                     </x-nav-link>
@@ -102,6 +105,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('accounts')" :active="request()->routeIs('accounts')">
                 {{ __('Accounts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('account-snapshots')" :active="request()->routeIs('account-snapshots')">
+                {{ __('Balance Snapshots') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('liabilities')" :active="request()->routeIs('liabilities')">
                 {{ __('Liabilities') }}

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\ManageAccountBalanceSnapshots;
 use App\Livewire\ManageAccounts;
 use App\Livewire\ManageCurrencies;
 use App\Livewire\ManageCurrencyPairs;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/institutions', ManageInstitutions::class)->name('institutions');
     Route::get('/currencies', ManageCurrencies::class)->name('currencies');
     Route::get('/accounts', ManageAccounts::class)->name('accounts');
+    Route::get('/account-snapshots', ManageAccountBalanceSnapshots::class)->name('account-snapshots');
     Route::get('/liabilities', ManageLiabilities::class)->name('liabilities');
     Route::get('/liability-payments', ManageLiabilityPayments::class)->name('liability-payments');
     Route::get('/currency-pairs', ManageCurrencyPairs::class)->name('currency-pairs');
