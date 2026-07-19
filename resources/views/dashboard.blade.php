@@ -16,6 +16,10 @@
                     <livewire:fx-sync-button />
                 </div>
             </div>
+
+            <div class="mt-6">
+                <livewire:dashboard-summary />
+            </div>
         </div>
     </div>
 </x-app-layout>
