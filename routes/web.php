@@ -8,6 +8,7 @@ use App\Livewire\ManageCurrencies;
 use App\Livewire\ManageCurrencyPairs;
 use App\Livewire\ManageInstitutions;
 use App\Livewire\ManageLiabilities;
+use App\Livewire\ManageTransactions;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/transactions', ManageTransactions::class)->name('transactions');
     Route::get('/institutions', ManageInstitutions::class)->name('institutions');
     Route::get('/currencies', ManageCurrencies::class)->name('currencies');
     Route::get('/accounts', ManageAccounts::class)->name('accounts');

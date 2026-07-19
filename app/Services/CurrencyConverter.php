@@ -21,7 +21,23 @@ final readonly class CurrencyConverter
 
     public function toCzk(string $amount, Currency $from, CarbonImmutable $date): ?ConversionResult
     {
-        if ($from->code === self::CZK) {
+        return $this->convert($amount, $from->id, $from->code, $date);
+    }
+
+    public function toCzkByCode(string $amount, string $currencyCode, CarbonImmutable $date): ?ConversionResult
+    {
+        $from = $this->currencies->findByCode($currencyCode);
+
+        if ($from === null) {
+            return null;
+        }
+
+        return $this->convert($amount, $from->id, $from->code, $date);
+    }
+
+    private function convert(string $amount, string $fromId, string $fromCode, CarbonImmutable $date): ?ConversionResult
+    {
+        if ($fromCode === self::CZK) {
             return new ConversionResult(amount: $amount, rate: '1.0000000000', rateDate: $date);
         }
 
@@ -31,7 +47,7 @@ final readonly class CurrencyConverter
             return null;
         }
 
-        $rate = $this->rates->latestRate($from->id, $czk->id, $date);
+        $rate = $this->rates->latestRate($fromId, $czk->id, $date);
 
         if ($rate === null) {
             return null;

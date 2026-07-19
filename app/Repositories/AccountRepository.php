@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Data\AccountData;
 use App\Models\Account;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 final readonly class AccountRepository implements AccountRepositoryInterface
 {
@@ -52,5 +53,17 @@ final readonly class AccountRepository implements AccountRepositoryInterface
     public function delete(string $id): void
     {
         Account::query()->where('id', $id)->delete();
+    }
+
+    /** @return Collection<int, AccountData> */
+    public function forInstitution(string $institutionId): Collection
+    {
+        return Account::query()
+            ->with(['institution', 'currency'])
+            ->where('institution_id', $institutionId)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Account $account): AccountData => AccountData::fromModel($account));
     }
 }
