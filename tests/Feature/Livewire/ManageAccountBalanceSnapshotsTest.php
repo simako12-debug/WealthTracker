@@ -114,4 +114,26 @@ class ManageAccountBalanceSnapshotsTest extends TestCase
             ->call('delete', $snapshot->id);
         $this->assertDatabaseMissing('account_balance_snapshots', ['id' => $snapshot->id]);
     }
+
+    public function test_editing_snapshot_date_to_existing_pair_fails_validation(): void
+    {
+        $account = Account::factory()->create();
+        $keep = AccountBalanceSnapshot::factory()->create([
+            'account_id' => $account->id, 'snapshot_date' => '2026-03-31',
+        ]);
+        $editing = AccountBalanceSnapshot::factory()->create([
+            'account_id' => $account->id, 'snapshot_date' => '2026-02-28',
+        ]);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ManageAccountBalanceSnapshots::class)
+            ->call('edit', $editing->id)
+            ->set('form.snapshotDate', '2026-03-31')
+            ->call('save')
+            ->assertHasErrors(['form.snapshotDate']);
+
+        // the colliding row is untouched, both rows still exist
+        $this->assertDatabaseHas('account_balance_snapshots', ['id' => $keep->id, 'snapshot_date' => '2026-03-31']);
+        $this->assertDatabaseHas('account_balance_snapshots', ['id' => $editing->id, 'snapshot_date' => '2026-02-28']);
+    }
 }

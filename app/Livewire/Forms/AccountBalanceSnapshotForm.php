@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Forms;
 
 use App\Data\AccountBalanceSnapshotData;
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class AccountBalanceSnapshotForm extends Form
@@ -22,10 +23,18 @@ class AccountBalanceSnapshotForm extends Form
     /** @return array<string, mixed> */
     public function rules(): array
     {
+        $snapshotDate = ['required', 'date'];
+
+        if ($this->id !== null) {
+            $snapshotDate[] = Rule::unique('account_balance_snapshots', 'snapshot_date')
+                ->where(fn ($query) => $query->where('account_id', $this->accountId))
+                ->ignore($this->id);
+        }
+
         return [
             'accountId' => ['required', 'exists:accounts,id'],
             'balance' => ['required', 'numeric'],
-            'snapshotDate' => ['required', 'date'],
+            'snapshotDate' => $snapshotDate,
             'note' => ['nullable', 'string'],
         ];
     }

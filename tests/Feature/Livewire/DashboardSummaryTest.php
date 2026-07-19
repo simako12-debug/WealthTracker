@@ -27,7 +27,7 @@ class DashboardSummaryTest extends TestCase
 
         Livewire::actingAs(User::factory()->create())
             ->test(DashboardSummary::class)
-            ->assertSee('2');
+            ->assertViewHas('accountCount', 2);
     }
 
     public function test_shows_recent_transactions(): void
@@ -54,5 +54,15 @@ class DashboardSummaryTest extends TestCase
             ->assertSee('Mortgage')
             ->assertSee('2026-05-01')
             ->assertDontSee('Closed');
+    }
+
+    public function test_active_liability_without_payments_shows_dash(): void
+    {
+        Liability::factory()->create(['name' => 'Fresh Loan', 'is_active' => true]);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(DashboardSummary::class)
+            ->assertSee('Fresh Loan')
+            ->assertSee('—');
     }
 }
