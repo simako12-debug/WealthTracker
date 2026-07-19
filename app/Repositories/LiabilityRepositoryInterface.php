@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Data\LiabilityData;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface LiabilityRepositoryInterface
 {
@@ -21,4 +22,7 @@ interface LiabilityRepositoryInterface
     public function update(string $id, array $attributes): LiabilityData;
 
     public function delete(string $id): void;
+
+    /** @return Collection<int, LiabilityData> */
+    public function active(): Collection;
 }
