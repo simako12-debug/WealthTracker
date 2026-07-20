@@ -63,21 +63,23 @@ Kopíruje zavedené vrstvení appky (service = testovatelná logika mimo Livewir
 
 Hlavička přesně těmito názvy (pořadí nerozhoduje, dohledává se dle názvu; volitelné sloupce smí chybět nebo být prázdné):
 
+`note` se **neimportuje** (u všech entit zůstane `null`). Šablony ho neobsahují.
+
 ### `transactions`
-`institution, account, type, amount, transaction_date, note, counterparty`
+`institution, account, type, amount, transaction_date, counterparty`
 - `type` = hodnota enumu `TransactionType` (`deposit, withdrawal, dividend, interest, capital_gain, capital_loss, fee, bond_income, other`)
-- `amount` decimal (tečka), `transaction_date` `YYYY-MM-DD`, `note`/`counterparty` volitelné.
-- Ukázka: `Fio banka,Fio běžný účet,deposit,15000.00,2026-01-15,Výplata,`
+- `amount` decimal (tečka), `transaction_date` `YYYY-MM-DD`, `counterparty` volitelné.
+- Ukázka: `Fio banka,Fio běžný účet,dividend,120.50,2026-01-15,AAPL`
 
 ### `account_snapshots`
-`institution, account, balance, snapshot_date, note`
-- `balance` decimal, `snapshot_date` `YYYY-MM-DD`, `note` volitelné.
-- Ukázka: `Degiro,Broker USD,15000.00,2026-03-31,Q1`
+`institution, account, balance, snapshot_date`
+- `balance` decimal, `snapshot_date` `YYYY-MM-DD`.
+- Ukázka: `Degiro,Broker USD,15000.00,2026-03-31`
 
 ### `liability_payments`
-`liability, payment_date, total_amount, principal_portion, interest_portion, note`
-- `total_amount` decimal (povinné), `principal_portion`/`interest_portion`/`note` volitelné.
-- Ukázka: `Hypotéka byt Praha,2026-01-31,12500.00,10000.00,2500.00,Leden`
+`liability, payment_date, total_amount, principal_portion, interest_portion`
+- `total_amount` decimal (povinné), `principal_portion`/`interest_portion` volitelné.
+- Ukázka: `Hypotéka byt Praha,2026-01-31,12500.00,10000.00,2500.00`
 
 ## 4. Validace řádku
 
