@@ -39,7 +39,7 @@
 
         <div class="mt-4">{{ $pairs->links() }}</div>
 
-        <x-modal name="currency-pair-modal" :show="$showModal" focusable>
+        <x-modal name="currency-pair-modal" entangle="showModal" focusable>
             <form wire:submit="save" class="space-y-4 p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ $form->id === null ? 'New currency pair' : 'Edit currency pair' }}

@@ -24,7 +24,7 @@
                             <td class="px-4 py-2 text-sm">{{ $t->transactionDate->toDateString() }}</td>
                             <td class="px-4 py-2 text-sm">{{ $t->accountName }}</td>
                             <td class="px-4 py-2 text-sm">{{ $t->type->label() }}</td>
-                            <td class="px-4 py-2 text-sm">{{ $t->amount }} {{ $t->accountCurrencyCode }}</td>
+                            <td class="px-4 py-2 text-sm">{{ number_format((float) $t->amount, 2) }} {{ $t->accountCurrencyCode }}</td>
                         </tr>
                     @endforeach
                 </tbody>

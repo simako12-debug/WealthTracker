@@ -27,11 +27,11 @@
                             <div>
                                 <span class="rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">{{ $selectedLiability->currencyCode }}</span>
                             </div>
-                            <div class="mt-1 text-gray-600 dark:text-gray-300">Monthly payment: {{ $selectedLiability->monthlyPayment ?? '—' }}</div>
+                            <div class="mt-1 text-gray-600 dark:text-gray-300">Monthly payment: {{ $selectedLiability->monthlyPayment !== null ? number_format((float) $selectedLiability->monthlyPayment, 2) : '—' }}</div>
                             <div class="text-gray-600 dark:text-gray-300">End date: {{ $selectedLiability->endDate?->toDateString() ?? '—' }}</div>
                             <div class="text-gray-600 dark:text-gray-300">Payments recorded: {{ $paymentCount }}</div>
                             @if ($lastPayment !== null)
-                                <div class="text-gray-600 dark:text-gray-300">Last payment: {{ $lastPayment->paymentDate->toDateString() }} — {{ $lastPayment->totalAmount }} {{ $lastPayment->currencyCode }}</div>
+                                <div class="text-gray-600 dark:text-gray-300">Last payment: {{ $lastPayment->paymentDate->toDateString() }} — {{ number_format((float) $lastPayment->totalAmount, 2) }} {{ $lastPayment->currencyCode }}</div>
                             @else
                                 <div class="text-gray-600 dark:text-gray-300">No payments yet</div>
                             @endif
@@ -95,9 +95,9 @@
                     @foreach ($recent as $p)
                         <tr wire:key="payment-{{ $p->id }}">
                             <td class="px-4 py-3 text-sm">{{ $p->paymentDate->toDateString() }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $p->totalAmount }} {{ $p->currencyCode }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $p->principalPortion }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $p->interestPortion }}</td>
+                            <td class="px-4 py-3 text-sm">{{ number_format((float) $p->totalAmount, 2) }} {{ $p->currencyCode }}</td>
+                            <td class="px-4 py-3 text-sm">{{ $p->principalPortion !== null ? number_format((float) $p->principalPortion, 2) : '' }}</td>
+                            <td class="px-4 py-3 text-sm">{{ $p->interestPortion !== null ? number_format((float) $p->interestPortion, 2) : '' }}</td>
                             <td class="px-4 py-3 text-sm">{{ $p->note }}</td>
                             <td class="px-4 py-3 text-right text-sm">
                                 <button wire:click="edit(@js($p->id))" class="text-indigo-600 hover:underline">Edit</button>

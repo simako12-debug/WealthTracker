@@ -41,7 +41,7 @@
 
         <div class="mt-4">{{ $accounts->links() }}</div>
 
-        <x-modal name="account-modal" :show="$showModal" focusable>
+        <x-modal name="account-modal" entangle="showModal" focusable>
             <form wire:submit="save" class="space-y-4 p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ $form->id === null ? 'New account' : 'Edit account' }}

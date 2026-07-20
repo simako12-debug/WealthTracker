@@ -1,6 +1,7 @@
 @props([
     'name',
     'show' => false,
+    'entangle' => null,
     'maxWidth' => '2xl'
 ])
 
@@ -16,7 +17,7 @@ $maxWidth = [
 
 <div
     x-data="{
-        show: @js($show),
+        show: @if ($entangle !== null) $wire.entangle('{{ $entangle }}') @else @js($show) @endif,
         focusables() {
             // All focusable element types...
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'

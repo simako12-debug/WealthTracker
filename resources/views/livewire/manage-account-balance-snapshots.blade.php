@@ -70,7 +70,7 @@
                                 {{ $s->accountName }}
                                 <div class="text-xs text-gray-500 dark:text-gray-400">{{ $s->institutionName }}</div>
                             </td>
-                            <td class="px-4 py-3 text-sm">{{ $s->balance }} {{ $s->currencyCode }}</td>
+                            <td class="px-4 py-3 text-sm">{{ number_format((float) $s->balance, 2) }} {{ $s->currencyCode }}</td>
                             <td class="px-4 py-3 text-sm">{{ $s->note }}</td>
                             <td class="px-4 py-3 text-right text-sm">
                                 <button wire:click="edit(@js($s->id))" class="text-indigo-600 hover:underline">Edit</button>
