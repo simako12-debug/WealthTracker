@@ -37,7 +37,7 @@
 
         <div class="mt-4">{{ $institutions->links() }}</div>
 
-        <x-modal name="institution-modal" :show="$showModal" focusable>
+        <x-modal name="institution-modal" entangle="showModal" focusable>
             <form wire:submit="save" class="space-y-4 p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ $form->id === null ? 'New institution' : 'Edit institution' }}

@@ -28,7 +28,7 @@
                             <td class="px-4 py-3 text-sm">{{ $liability->name }}</td>
                             <td class="px-4 py-3 text-sm">{{ $liability->institutionName }}</td>
                             <td class="px-4 py-3 text-sm">{{ $liability->currencyCode }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $liability->principalAmount }}</td>
+                            <td class="px-4 py-3 text-sm">{{ number_format((float) $liability->principalAmount, 2) }}</td>
                             <td class="px-4 py-3 text-sm">{{ $liability->interestRate }}</td>
                             <td class="px-4 py-3 text-sm">{{ $liability->isActive ? 'Yes' : 'No' }}</td>
                             <td class="px-4 py-3 text-right text-sm">
@@ -43,7 +43,7 @@
 
         <div class="mt-4">{{ $liabilities->links() }}</div>
 
-        <x-modal name="liability-modal" :show="$showModal" focusable>
+        <x-modal name="liability-modal" entangle="showModal" focusable>
             <form wire:submit="save" class="space-y-4 p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ $form->id === null ? 'New liability' : 'Edit liability' }}

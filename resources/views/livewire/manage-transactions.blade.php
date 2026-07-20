@@ -105,7 +105,7 @@
                                 <div class="text-xs text-gray-500 dark:text-gray-400">{{ $t->institutionName }}</div>
                             </td>
                             <td class="px-4 py-3 text-sm">{{ $t->type->label() }}</td>
-                            <td class="px-4 py-3 text-sm">{{ $t->amount }} {{ $t->accountCurrencyCode }}</td>
+                            <td class="px-4 py-3 text-sm">{{ number_format((float) $t->amount, 2) }} {{ $t->accountCurrencyCode }}</td>
                             <td class="px-4 py-3 text-sm">{{ $t->counterparty }}</td>
                             <td class="px-4 py-3 text-right text-sm">
                                 <button wire:click="edit(@js($t->id))" class="text-indigo-600 hover:underline">Edit</button>
