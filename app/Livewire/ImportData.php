@@ -30,7 +30,7 @@ class ImportData extends Component
 
     public function import(CsvImportService $service): void
     {
-        $importTarget = $this->target === null ? null : ImportTarget::tryFrom($this->target);
+        $importTarget = $this->resolveTarget();
 
         if ($importTarget === null || $this->csv === null) {
             return;
@@ -45,7 +45,7 @@ class ImportData extends Component
 
     public function render(CsvImportService $service): View
     {
-        $importTarget = $this->target === null ? null : ImportTarget::tryFrom($this->target);
+        $importTarget = $this->resolveTarget();
 
         $preview = ($importTarget !== null && $this->csv !== null)
             ? $service->preview($importTarget, $this->csv->get(), $this->skipDuplicates)
@@ -55,5 +55,10 @@ class ImportData extends Component
             'targets' => ImportTarget::cases(),
             'preview' => $preview,
         ]);
+    }
+
+    private function resolveTarget(): ?ImportTarget
+    {
+        return $this->target === null ? null : ImportTarget::tryFrom($this->target);
     }
 }
