@@ -116,6 +116,57 @@ class CsvImportServiceTest extends TestCase
         $this->assertDatabaseHas('liability_payments', ['total_amount' => '12500.0000000000', 'principal_portion' => '10000.0000000000']);
     }
 
+    public function test_intra_batch_identical_transactions_dedupe_when_skip_enabled(): void
+    {
+        $this->account();
+        $csv = implode("\n", [
+            'institution,account,type,amount,transaction_date,counterparty',
+            'Fio banka,Běžný účet,fee,10.00,2026-01-15,',
+            'Fio banka,Běžný účet,fee,10.00,2026-01-15,',
+        ]);
+
+        $skipOn = $this->service()->import(ImportTarget::TRANSACTIONS, $csv, true);
+        $this->assertSame(1, $skipOn->imported);
+        $this->assertSame(1, $skipOn->skipped);
+        $this->assertSame(1, Transaction::query()->count());
+    }
+
+    public function test_intra_batch_identical_transactions_both_insert_when_skip_disabled(): void
+    {
+        $this->account();
+        $csv = implode("\n", [
+            'institution,account,type,amount,transaction_date,counterparty',
+            'Fio banka,Běžný účet,fee,10.00,2026-01-15,',
+            'Fio banka,Běžný účet,fee,10.00,2026-01-15,',
+        ]);
+
+        $this->service()->import(ImportTarget::TRANSACTIONS, $csv, false);
+        $this->assertSame(2, Transaction::query()->count());
+    }
+
+    public function test_rejects_wrong_date_format(): void
+    {
+        $this->account();
+        $csv = "institution,account,type,amount,transaction_date,counterparty\nFio banka,Běžný účet,deposit,10.00,15.01.2026,\n";
+
+        $preview = $this->service()->preview(ImportTarget::TRANSACTIONS, $csv, true);
+
+        $this->assertSame(1, $preview->errorCount);
+    }
+
+    public function test_empty_optional_numeric_portions_import_as_null(): void
+    {
+        Liability::factory()->create(['name' => 'Hypotéka byt Praha']);
+        $csv = "liability,payment_date,total_amount,principal_portion,interest_portion\nHypotéka byt Praha,2026-01-31,12500.00,,\n";
+
+        $result = $this->service()->import(ImportTarget::LIABILITY_PAYMENTS, $csv, true);
+
+        $this->assertSame(1, $result->imported);
+        $this->assertDatabaseHas('liability_payments', [
+            'total_amount' => '12500.0000000000', 'principal_portion' => null, 'interest_portion' => null,
+        ]);
+    }
+
     public function test_preview_reports_error_status_and_message_for_bad_row(): void
     {
         $this->account();

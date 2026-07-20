@@ -20,8 +20,8 @@ final class ImportSampleController extends Controller
 
         return response()->streamDownload(function () use ($headers, $sample): void {
             $handle = fopen('php://output', 'wb');
-            fputcsv($handle, $headers);
-            fputcsv($handle, $sample);
+            fputcsv($handle, $headers, escape: '');
+            fputcsv($handle, $sample, escape: '');
             fclose($handle);
         }, "{$target}-sample.csv", ['Content-Type' => 'text/csv']);
     }

@@ -47,7 +47,8 @@ class ImportDataTest extends TestCase
             ->test(ImportData::class)
             ->set('target', 'transactions')
             ->set('csv', $this->transactionsCsv())
-            ->assertSee('1') // valid count / row
+            ->assertSee('Valid: 1')
+            ->assertSee('Errors: 1')
             ->assertSee('not found');
     }
 

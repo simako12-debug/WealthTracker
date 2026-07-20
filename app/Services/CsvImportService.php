@@ -40,7 +40,7 @@ final readonly class CsvImportService
             return [];
         }
 
-        $header = str_getcsv(array_shift($lines));
+        $header = str_getcsv(array_shift($lines), escape: '');
         $rows = [];
 
         foreach ($lines as $line) {
@@ -48,7 +48,7 @@ final readonly class CsvImportService
                 continue;
             }
 
-            $values = str_getcsv($line);
+            $values = str_getcsv($line, escape: '');
             $values = array_slice($values, 0, count($header));
             $values = array_pad($values, count($header), '');
             /** @var array<string, string> $row */
@@ -102,6 +102,7 @@ final readonly class CsvImportService
     private function evaluate(ImportTarget $target, string $contents, bool $skipDuplicates): Collection
     {
         $rows = new Collection;
+        $seenKeys = [];
 
         foreach ($this->parse($contents) as $index => $raw) {
             $line = $index + 2; // +1 header, +1 to 1-index
@@ -128,10 +129,42 @@ final readonly class CsvImportService
                 continue;
             }
 
+            $key = $this->duplicateKey($target, $attributes);
+
+            if ($skipDuplicates && $key !== null && in_array($key, $seenKeys, true)) {
+                $rows->push(new ImportRowResult($line, $raw, ImportRowResult::DUPLICATE));
+
+                continue;
+            }
+
+            if ($key !== null) {
+                $seenKeys[] = $key;
+            }
+
             $rows->push(new ImportRowResult($line, $raw, ImportRowResult::VALID, null, $attributes));
         }
 
         return $rows;
+    }
+
+    /** @param array<string, mixed> $attributes */
+    private function duplicateKey(ImportTarget $target, array $attributes): ?string
+    {
+        return match ($target) {
+            ImportTarget::TRANSACTIONS => implode('|', [
+                $attributes['account_id'],
+                $attributes['transaction_date'],
+                $attributes['type'],
+                $attributes['amount'],
+                $attributes['counterparty'],
+            ]),
+            ImportTarget::LIABILITY_PAYMENTS => implode('|', [
+                $attributes['liability_id'],
+                $attributes['payment_date'],
+                $attributes['total_amount'],
+            ]),
+            ImportTarget::ACCOUNT_SNAPSHOTS => null,
+        };
     }
 
     /**
