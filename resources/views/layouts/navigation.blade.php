@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('transactions')" :active="request()->routeIs('transactions')">
                         {{ __('Transactions') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('import')" :active="request()->routeIs('import')">
+                        {{ __('Import') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('institutions')" :active="request()->routeIs('institutions')">
                         {{ __('Institutions') }}
                     </x-nav-link>
@@ -96,6 +99,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('transactions')" :active="request()->routeIs('transactions')">
                 {{ __('Transactions') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('import')" :active="request()->routeIs('import')">
+                {{ __('Import') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('institutions')" :active="request()->routeIs('institutions')">
                 {{ __('Institutions') }}

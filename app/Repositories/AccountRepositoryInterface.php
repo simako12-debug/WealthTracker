@@ -30,4 +30,6 @@ interface AccountRepositoryInterface
     public function active(): Collection;
 
     public function count(): int;
+
+    public function findByInstitutionAndName(string $institutionName, string $accountName): ?AccountData;
 }

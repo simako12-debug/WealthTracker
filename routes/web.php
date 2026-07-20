@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\ImportSampleController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\ImportData;
 use App\Livewire\ManageAccountBalanceSnapshots;
 use App\Livewire\ManageAccounts;
 use App\Livewire\ManageCurrencies;
@@ -27,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/transactions', ManageTransactions::class)->name('transactions');
+    Route::get('/import', ImportData::class)->name('import');
+    Route::get('/import/sample/{target}', ImportSampleController::class)->name('import.sample');
     Route::get('/institutions', ManageInstitutions::class)->name('institutions');
     Route::get('/currencies', ManageCurrencies::class)->name('currencies');
     Route::get('/accounts', ManageAccounts::class)->name('accounts');

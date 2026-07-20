@@ -52,4 +52,20 @@ final readonly class TransactionRepository implements TransactionRepositoryInter
     {
         Transaction::query()->where('id', $id)->delete();
     }
+
+    /** @param array<string, mixed> $key */
+    public function existsMatching(array $key): bool
+    {
+        return Transaction::query()
+            ->where('account_id', $key['account_id'])
+            ->where('transaction_date', $key['transaction_date'])
+            ->where('type', $key['type'])
+            ->where('amount', $key['amount'])
+            ->when(
+                $key['counterparty'] === null,
+                fn ($query) => $query->whereNull('counterparty'),
+                fn ($query) => $query->where('counterparty', $key['counterparty']),
+            )
+            ->exists();
+    }
 }

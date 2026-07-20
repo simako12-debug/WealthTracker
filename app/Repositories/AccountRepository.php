@@ -82,4 +82,17 @@ final readonly class AccountRepository implements AccountRepositoryInterface
     {
         return Account::query()->count();
     }
+
+    public function findByInstitutionAndName(string $institutionName, string $accountName): ?AccountData
+    {
+        $account = Account::query()
+            ->with(['institution', 'currency'])
+            ->where('name', $accountName)
+            ->whereHas('institution', function ($query) use ($institutionName): void {
+                $query->where('name', $institutionName);
+            })
+            ->first();
+
+        return $account === null ? null : AccountData::fromModel($account);
+    }
 }

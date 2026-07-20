@@ -25,4 +25,6 @@ interface LiabilityRepositoryInterface
 
     /** @return Collection<int, LiabilityData> */
     public function active(): Collection;
+
+    public function findByName(string $name): ?LiabilityData;
 }

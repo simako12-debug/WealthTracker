@@ -21,4 +21,7 @@ interface TransactionRepositoryInterface
     public function update(string $id, array $attributes): TransactionData;
 
     public function delete(string $id): void;
+
+    /** @param array<string, mixed> $key */
+    public function existsMatching(array $key): bool;
 }

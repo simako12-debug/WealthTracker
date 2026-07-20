@@ -69,4 +69,14 @@ final readonly class LiabilityPaymentRepository implements LiabilityPaymentRepos
     {
         LiabilityPayment::query()->where('id', $id)->delete();
     }
+
+    /** @param array<string, mixed> $key */
+    public function existsMatching(array $key): bool
+    {
+        return LiabilityPayment::query()
+            ->where('liability_id', $key['liability_id'])
+            ->where('payment_date', $key['payment_date'])
+            ->where('total_amount', $key['total_amount'])
+            ->exists();
+    }
 }

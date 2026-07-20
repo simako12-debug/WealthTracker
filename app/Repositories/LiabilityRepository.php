@@ -65,4 +65,11 @@ final readonly class LiabilityRepository implements LiabilityRepositoryInterface
             ->get()
             ->map(fn (Liability $liability): LiabilityData => LiabilityData::fromModel($liability));
     }
+
+    public function findByName(string $name): ?LiabilityData
+    {
+        $liability = Liability::query()->with(['institution', 'currency'])->where('name', $name)->first();
+
+        return $liability === null ? null : LiabilityData::fromModel($liability);
+    }
 }
