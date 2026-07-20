@@ -26,4 +26,7 @@ interface LiabilityPaymentRepositoryInterface
     public function update(string $id, array $attributes): LiabilityPaymentData;
 
     public function delete(string $id): void;
+
+    /** @param array<string, mixed> $key */
+    public function existsMatching(array $key): bool;
 }
