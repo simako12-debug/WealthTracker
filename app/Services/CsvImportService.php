@@ -65,9 +65,9 @@ final readonly class CsvImportService
 
         return new ImportPreview(
             total: $rows->count(),
-            validCount: $rows->where('status', ImportRowResult::VALID)->count(),
-            duplicateCount: $rows->where('status', ImportRowResult::DUPLICATE)->count(),
-            errorCount: $rows->where('status', ImportRowResult::ERROR)->count(),
+            validCount: $this->countByStatus($rows, ImportRowResult::VALID),
+            duplicateCount: $this->countByStatus($rows, ImportRowResult::DUPLICATE),
+            errorCount: $this->countByStatus($rows, ImportRowResult::ERROR),
             rows: $rows,
         );
     }
@@ -85,11 +85,17 @@ final readonly class CsvImportService
         });
 
         return new ImportResult(
-            imported: $rows->where('status', ImportRowResult::VALID)->count(),
-            skipped: $rows->where('status', ImportRowResult::DUPLICATE)->count(),
-            failed: $rows->where('status', ImportRowResult::ERROR)->count(),
+            imported: $this->countByStatus($rows, ImportRowResult::VALID),
+            skipped: $this->countByStatus($rows, ImportRowResult::DUPLICATE),
+            failed: $this->countByStatus($rows, ImportRowResult::ERROR),
             rows: $rows,
         );
+    }
+
+    /** @param Collection<int, ImportRowResult> $rows */
+    private function countByStatus(Collection $rows, string $status): int
+    {
+        return $rows->where('status', $status)->count();
     }
 
     /** @return Collection<int, ImportRowResult> */
