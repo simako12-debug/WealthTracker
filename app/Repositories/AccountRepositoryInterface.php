@@ -25,4 +25,9 @@ interface AccountRepositoryInterface
     public function update(string $id, array $attributes): AccountData;
 
     public function delete(string $id): void;
+
+    /** @return Collection<int, AccountData> */
+    public function active(): Collection;
+
+    public function count(): int;
 }

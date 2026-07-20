@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Data\LiabilityData;
 use App\Models\Liability;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 final readonly class LiabilityRepository implements LiabilityRepositoryInterface
 {
@@ -52,5 +53,16 @@ final readonly class LiabilityRepository implements LiabilityRepositoryInterface
     public function delete(string $id): void
     {
         Liability::query()->where('id', $id)->delete();
+    }
+
+    /** @return Collection<int, LiabilityData> */
+    public function active(): Collection
+    {
+        return Liability::query()
+            ->with(['institution', 'currency'])
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get()
+            ->map(fn (Liability $liability): LiabilityData => LiabilityData::fromModel($liability));
     }
 }
